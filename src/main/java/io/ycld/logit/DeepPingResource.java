@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 @Path("/ping")
 public class DeepPingResource {
   @Inject
-  private JdbcWriter logger;
+  private JdbcWriterAurora logger;
 
   @GET
   @Produces(MediaType.TEXT_PLAIN)

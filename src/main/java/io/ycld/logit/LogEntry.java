@@ -99,10 +99,10 @@ public class LogEntry {
       byte[] tag = Hex.decodeHex(hexTag.toCharArray());
       byte[] ref = Hex.decodeHex(hexRef.toCharArray());
 
-      return ImmutableMap.<String, Object>builder().put(JdbcWriter.TIMESTAMP_COL, ts.getMillis())
-          .put(JdbcWriter.ID_COL, uuid).put(JdbcWriter.TAG_COL, tag).put(JdbcWriter.REF_COL, ref)
-          .put(JdbcWriter.LAT_COL, lat).put(JdbcWriter.DATA_COL, data)
-          .put(JdbcWriter.ARCH_COL, arch).build();
+      return ImmutableMap.<String, Object>builder().put(JdbcWriterAurora.TIMESTAMP_COL, ts.getMillis())
+          .put(JdbcWriterAurora.ID_COL, uuid).put(JdbcWriterAurora.TAG_COL, tag).put(JdbcWriterAurora.REF_COL, ref)
+          .put(JdbcWriterAurora.LAT_COL, lat).put(JdbcWriterAurora.DATA_COL, data)
+          .put(JdbcWriterAurora.ARCH_COL, arch).build();
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

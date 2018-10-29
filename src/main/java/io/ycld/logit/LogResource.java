@@ -52,7 +52,7 @@ public class LogResource {
   private DateTimeFormatter format;
 
   @Inject
-  private JdbcWriter logger;
+  private JdbcWriterAurora logger;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)

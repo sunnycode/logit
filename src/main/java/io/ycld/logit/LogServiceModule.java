@@ -20,7 +20,6 @@ package io.ycld.logit;
 import io.ycld.logit.lib.webs.Config;
 import io.ycld.logit.lib.webs.ConnectionCloseFilter;
 import io.ycld.logit.lib.webs.JettyServiceProvider;
-import io.ycld.redissolve.struct.queue.RedisQueue;
 
 import org.eclipse.jetty.server.Server;
 import org.joda.time.DateTimeZone;
@@ -43,7 +42,7 @@ public class LogServiceModule extends ServletModule {
   protected void configureServlets() {
     bind(LogResource.class).asEagerSingleton();
     bind(DeepPingResource.class).asEagerSingleton();
-    bind(JdbcWriter.class).asEagerSingleton();
+    bind(JdbcWriterAurora.class).asEagerSingleton();
 
     Config config = new Config("logit.", "io/ycld/logit/logit.properties");
 
@@ -53,7 +52,7 @@ public class LogServiceModule extends ServletModule {
     bind(DateTimeFormatter.class).annotatedWith(Names.named("external.datetimeformat")).toInstance(
         ISODateTimeFormat.basicDateTime().withZone(DateTimeZone.UTC));
     bind(ConnectionCloseFilter.class).asEagerSingleton();
-    bind(RedisQueue.class).asEagerSingleton();
+    // bind(RedisQueue.class).asEagerSingleton();
 
     serve("*").with(GuiceContainer.class);
     filter("*").through(ConnectionCloseFilter.class);
