@@ -311,13 +311,13 @@ public class JdbcWriterAurora {
               int i = 0;
               if (hexTag != null && hexTag.length() > 0) {
                 query.bind(i++, hexTag);
+                query.bind(i++, "\\");
                 query.bind(i++, "\\\\");
-                query.bind(i++, "\\\\\\\\");
 
                 if (hexRef != null && hexRef.length() > 0) {
                   query.bind(i++, hexRef);
+                  query.bind(i++, "\\");
                   query.bind(i++, "\\\\");
-                  query.bind(i++, "\\\\\\\\");
                 }
               }
 
