@@ -288,10 +288,10 @@ public class JdbcWriterAurora {
                 + partition + " where ";
 
         if (hexTag != null && hexTag.length() > 0) {
-          query += " tag like binary concat(unhex(?), '%') and ";
+          query += " tag like binary concat(replace(unhex(?), '\\', '\\\\'), '%') and ";
 
           if (hexRef != null && hexRef.length() > 0) {
-            query += " ref like binary concat(unhex(?), '%') and ";
+            query += " ref like binary concat(replace(unhex(?), '\\', '\\\\'), '%') and ";
           }
         }
 
