@@ -384,10 +384,10 @@ public class JdbcWriterAurora {
           String query = "select ts, id, tag, ref, lat, d, a from " + partition + " where ";
 
           if (hexTag != null && hexTag.length() > 0) {
-            query += " tag like binary concat(unhex(?), '%') and ";
+            query += " tag like binary concat(replace(unhex(?), ?, ?), '%') and ";
 
             if (hexRef != null && hexRef.length() > 0) {
-              query += " ref like binary concat(unhex(?), '%') and ";
+              query += " ref like binary concat(replace(unhex(?), ?, ?), '%') and ";
             }
           }
 
@@ -416,9 +416,13 @@ public class JdbcWriterAurora {
                 int i = 0;
                 if (hexTag != null && hexTag.length() > 0) {
                   query.bind(i++, hexTag);
+                  query.bind(i++, "\\");
+                  query.bind(i++, "\\\\");
 
                   if (hexRef != null && hexRef.length() > 0) {
                     query.bind(i++, hexRef);
+                    query.bind(i++, "\\");
+                    query.bind(i++, "\\\\");
                   }
                 }
                 query.bind(i++, currentMillis);
